@@ -1,7 +1,8 @@
-package com.example.hqtv
+package com.example.hqtv.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.hqtv.R
 
 class MainActivity : AppCompatActivity() {
 
