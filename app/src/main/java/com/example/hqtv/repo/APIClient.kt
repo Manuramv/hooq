@@ -18,7 +18,7 @@ class APIClient {
             val okHttpClient = OkHttpClient.Builder().addNetworkInterceptor(logging).build()
 
 
-            val retrofit = retrofit2.Retrofit.Builder()
+            val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(Constants.BASE_URL)

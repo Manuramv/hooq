@@ -37,6 +37,8 @@ dependencies {
     def retrofit_version = "2.7.1"
     def okhttp_version = "4.4.0"
     def recyclerview_version = "1.0.0"
+    def rx_java = "2.4.0"
+    def rx_android= "2.1.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -52,6 +54,12 @@ dependencies {
 
     // Lifecycles
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecylce_version"
+
+    //RXjava
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android"
+
+
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
