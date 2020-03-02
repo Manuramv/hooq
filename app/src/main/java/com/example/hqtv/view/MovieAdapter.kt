@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.hqtv.R
 import com.example.hqtv.commonutils.Constants
 import com.example.hqtv.models.MoviesResponse
@@ -29,8 +30,10 @@ class MovieAdapter(val movieData: MoviesResponse) : RecyclerView.Adapter<MovieAd
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       holder.imgView.setImageResource(R.drawable.ic_launcher_background)
-        Picasso.with(holder.imgView.context).load(Constants.BASE_IMAGE_URL+movieData.results.get(position).poster_path).into(holder.imgView)
+      // holder.imgView.setImageResource(R.drawable.ic_launcher_background)
+        //Picasso.with(holder.imgView.context).load(Constants.BASE_IMAGE_URL+movieData.results.get(position).poster_path).into(holder.imgView)
+        Glide.with(holder.imgView.context).load(Constants.BASE_IMAGE_URL+movieData.results.get(position).poster_path).into(holder.imgView)
+
     }
 
 

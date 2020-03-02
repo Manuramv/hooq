@@ -40,6 +40,7 @@ dependencies {
     def rx_java = "2.4.0"
     def rx_android= "2.1.0"
     def picasso_versoin= "2.1.0"
+    def glide_versoin= "4.8.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -76,4 +77,5 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     //picasso
     implementation "com.squareup.picasso:picasso:$picasso_versoin"
+    implementation "com.github.bumptech.glide:glide:$glide_versoin"
 }
