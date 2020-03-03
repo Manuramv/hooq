@@ -11,6 +11,7 @@ import com.example.hqtv.models.MoviesResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hqtv.commonutils.Constants
 import com.example.hqtv.commonutils.NetworkUtils
 import com.example.hqtv.customcomponents.HqAlertDialog
 import kotlinx.android.synthetic.main.custom_hq_error_dialog.*
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        showInitialLoading()
+        showInitialLoadingProgressBar()
         observeList()
         getNowPLayingMovieList();
 
@@ -45,11 +46,13 @@ class MainActivity : AppCompatActivity() {
     private fun addImagesToRecyclerView(it: MoviesResponse) {
         var rowViewModels: ArrayList<RowItemViewModel>? = arrayListOf()
             it.results?.map {
-                rowViewModels?.add(RowItemViewModel(it))}
-        rvMovieList.layoutManager = GridLayoutManager(this, 3)
+                rowViewModels?.add(RowItemViewModel(it))
+            }
+        rvMovieList.layoutManager = GridLayoutManager(this, Constants.GRID_ITEMS_COUNT)
         movieAdapter = MovieAdapter(rowViewModels!!)
         rvMovieList.adapter = movieAdapter
-        hideInitialLoading()
+        hideInitialLoadingProgressBar()
+        hideNetworErrorMessage()
     }
 
     // Observers the mutable list to update recycler view
@@ -60,21 +63,25 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    //progressbar
+    //this method will show the network error message
     fun showNetworkErrorMessage(){
-        hideInitialLoading()
-
-       /* HqAlertDialog(this).errorAlertDialog("error msg",{
-            mainViewModel.fetchMovieList();
-        })*/
+        hideInitialLoadingProgressBar()
+        viewRetry.visibility = View.VISIBLE
     }
 
-    fun showInitialLoading(){
+    ////this method will hide the network error message
+    fun hideNetworErrorMessage(){
+        viewRetry.visibility = View.GONE
+    }
+
+    //This method will show the progress bar and Loading entertainment msg to user
+    fun showInitialLoadingProgressBar(){
         pbMain.isVisible = true
         txtLoadingExperience.visibility = View.VISIBLE
     }
 
-    fun hideInitialLoading(){
+    //This method will hide the progress bar and Loading entertainment msg to user
+    fun hideInitialLoadingProgressBar(){
         pbMain.isVisible = false
         txtLoadingExperience.visibility = View.GONE
     }

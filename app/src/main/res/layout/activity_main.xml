@@ -35,6 +35,7 @@
 
     <include layout="@layout/custom_hq_error_dialog"
         android:id="@+id/viewRetry"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
