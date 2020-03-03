@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hqtv.commonutils.NetworkUtils
 import com.example.hqtv.customcomponents.HqAlertDialog
+import kotlinx.android.synthetic.main.custom_hq_error_dialog.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         showInitialLoading()
         observeList()
         getNowPLayingMovieList();
+
+        btnRetry.setOnClickListener{
+            getNowPLayingMovieList()
+        }
 
     }
 
@@ -57,9 +62,11 @@ class MainActivity : AppCompatActivity() {
 
     //progressbar
     fun showNetworkErrorMessage(){
-        HqAlertDialog(this).errorAlertDialog("error msg",{
+        hideInitialLoading()
+
+       /* HqAlertDialog(this).errorAlertDialog("error msg",{
             mainViewModel.fetchMovieList();
-        })
+        })*/
     }
 
     fun showInitialLoading(){

@@ -6,4 +6,6 @@
     <string name="error_title">Error</string>
     <string name="retry_title">Retry</string>
     <string name="loading_entertainment_msg">Loading your entertainment experience!</string>
+    <string name="something_wrong_title">Oops, something went wrong</string>
+    <string name="internet_error_msg">Please check your connection and retry loading the page</string>
 </resources>
