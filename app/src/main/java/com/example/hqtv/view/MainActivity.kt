@@ -8,8 +8,7 @@ import com.example.hqtv.R
 import com.example.hqtv.models.MoviesResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.GridLayoutManager
-
-
+import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +29,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addImagesToRecyclerView(it: MoviesResponse) {
-        movieAdapter = MovieAdapter(it)
+
+
+        var rowViewModels: ArrayList<RowItemViewModel>? = arrayListOf()
+
+
+            it.results?.map {
+                rowViewModels?.add(RowItemViewModel(it))}
+
+
+
         rvMovieList.layoutManager = GridLayoutManager(this, 3)
+        movieAdapter = MovieAdapter(rowViewModels!!)
         rvMovieList.adapter = movieAdapter
 
     }
