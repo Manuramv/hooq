@@ -31,7 +31,8 @@ class MainViewModel : ViewModel() {
 
 
 
-    //Initalize pagelist library.
+    //Initalize pagelist library. We are not using the scroll list listner to load the next item.
+    // PAging libarary seems to be very effective one.
     private fun initializedPagedListBuilder(config: PagedList.Config): LivePagedListBuilder<String, Result> {
         val dataSourceFactory = object : DataSource.Factory<String, Result>() {
             override fun create(): DataSource<String, Result> {
