@@ -14,6 +14,8 @@ import java.util.*
 /**
  * Created by manuramv on 2020-02-24.
  */
+
+//Repo will call the retrofit interface and trigger the HTTP call.
 class AppRepo {
     var apiServiceInterface:APIServiceInterface?=null
     init {

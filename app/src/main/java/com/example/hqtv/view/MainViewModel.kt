@@ -15,6 +15,8 @@ import kotlinx.coroutines.Dispatchers
  * Created by manuramv on 2020-02-29.
  */
 class MainViewModel : ViewModel() {
+    //this viewmodel configure the paging library and communicate back-forth between main activity and repo.
+
     val appRepo = AppRepo()
     var postsLiveData  :LiveData<PagedList<Result>>
     lateinit var postsDataSource : PostsDataSource
@@ -24,10 +26,12 @@ class MainViewModel : ViewModel() {
         postsLiveData  = initializedPagedListBuilder(config).build()
     }
 
+
     fun getMovies():LiveData<PagedList<Result>> = postsLiveData
 
 
 
+    //Initalize pagelist library.
     private fun initializedPagedListBuilder(config: PagedList.Config): LivePagedListBuilder<String, Result> {
         val dataSourceFactory = object : DataSource.Factory<String, Result>() {
             override fun create(): DataSource<String, Result> {

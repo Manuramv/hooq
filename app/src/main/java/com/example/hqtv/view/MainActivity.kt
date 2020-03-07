@@ -27,14 +27,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
+        //Calling the progress bar immediately after user launchign the app.
         showInitialLoadingProgressBar()
+        //Init Recyclerview
         initializeRecyclerView()
 
+        //If internet is not there when there is no item to show, we will show a special error as per requirement and each time we re-trigger the API
+        //when user clicks retry.
         btnRetry.setOnClickListener{
             observeLiveData()
         }
 
-        //Adding the 2 seconds delay to show the loading experience
+        //Adding the 2 seconds delay to show the loading experience progress bar(Since it's a sample project I put the delay deliberately).
         val handler = Handler()
         handler.postDelayed(Runnable {
             observeLiveData()
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    //Observing for data changes.
     private fun observeLiveData() {
         //observe live data emitted by view model
         if(NetworkUtils.isNetworkAvailable(this)){
