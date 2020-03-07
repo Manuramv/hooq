@@ -7,9 +7,10 @@ This Application fetches the currently playing movies from TMDB. You can scroll 
 
 Purpose of this application is to use the latest jetpack components and explore it.
 
-* Bullet list  MVVM (Followed MVVM architecture to create this Application
-* Bullet list Kotlin 
-* Bullet list Retrofit
-* Bullet list Coroutines
-* Bullet list Paging Library (Used to load the images in recyclerview).
-* Bullet list Data Binding.
+* Bullet list
+  MVVM (Followed MVVM architecture to create this Application
+  Kotlin 
+  Retrofit
+  Coroutines
+  Paging Library (Used to load the images in recyclerview).
+  Data Binding.
