@@ -30,4 +30,8 @@ class AppRepo {
             )
 
     }
+
+   /* fun getNMovies(pageIndex:Int) : MoviesResponse {
+        return apiServiceInterface?.getNewMoviess(pageIndex,Constants.TMDB_API_KEY)!!
+    }*/
 }

@@ -15,53 +15,66 @@ import com.example.hqtv.commonutils.Constants
 import com.example.hqtv.commonutils.NetworkUtils
 import com.example.hqtv.customcomponents.HqAlertDialog
 import kotlinx.android.synthetic.main.custom_hq_error_dialog.*
+import androidx.paging.PagedList
+import io.reactivex.disposables.CompositeDisposable
+import androidx.core.os.HandlerCompat.postDelayed
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+import android.os.Handler
+import android.util.Log
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var mainViewModel:MainViewModel
-    lateinit var movieAdapter: MovieAdapter
+     val movieAdapter = MovieAdapter()
+    val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
         showInitialLoadingProgressBar()
-        observeList()
-        getNowPLayingMovieList();
+        initializeRecyclerView()
 
         btnRetry.setOnClickListener{
-            getNowPLayingMovieList()
+            observeLiveData()
         }
+
+        //Adding the 2 seconds delay to show the loading experience
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            observeLiveData()
+        }, 2000)
 
     }
 
-    private fun getNowPLayingMovieList() {
-        if(NetworkUtils.isNetworkAvailable(this)){
-            mainViewModel.fetchMovieList();
-        }
-        else
-            showNetworkErrorMessage()
-    }
 
-    private fun addImagesToRecyclerView(it: MoviesResponse) {
-        var rowViewModels: ArrayList<RowItemViewModel>? = arrayListOf()
-            it.results?.map {
-                rowViewModels?.add(RowItemViewModel(it))
-            }
+    private fun initializeRecyclerView() {
         rvMovieList.layoutManager = GridLayoutManager(this, Constants.GRID_ITEMS_COUNT)
-        movieAdapter = MovieAdapter(rowViewModels!!)
         rvMovieList.adapter = movieAdapter
-        hideInitialLoadingProgressBar()
-        hideNetworErrorMessage()
     }
 
-    // Observers the mutable list to update recycler view
-    private fun observeList() {
-        mainViewModel?.movieResults?.observe(this,
-            Observer {
-                addImagesToRecyclerView(it)
+
+    private fun observeLiveData() {
+        //observe live data emitted by view model
+        if(NetworkUtils.isNetworkAvailable(this)){
+            mainViewModel.getPosts()?.observe(this, Observer {
+                movieAdapter.submitList(it)
+                hideInitialLoadingProgressBar()
+                hideNetworErrorMessage()
             })
+        }
+        else {
+            showNetworkErrorMessage()
+        }
+
     }
+
+
+
 
     //this method will show the network error message
     fun showNetworkErrorMessage(){
@@ -74,6 +87,8 @@ class MainActivity : AppCompatActivity() {
         viewRetry.visibility = View.GONE
     }
 
+
+
     //This method will show the progress bar and Loading entertainment msg to user
     fun showInitialLoadingProgressBar(){
         pbMain.isVisible = true
@@ -85,4 +100,7 @@ class MainActivity : AppCompatActivity() {
         pbMain.isVisible = false
         txtLoadingExperience.visibility = View.GONE
     }
+
+
+
 }
