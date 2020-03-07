@@ -2,10 +2,14 @@ package com.example.hqtv.repo
 
 import com.example.hqtv.commonutils.Constants
 import com.example.hqtv.models.MoviesResponse
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.operators.single.SingleDoOnSuccess
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.Response
+import java.util.*
 
 /**
  * Created by manuramv on 2020-02-24.
@@ -30,8 +34,4 @@ class AppRepo {
             )
 
     }
-
-   /* fun getNMovies(pageIndex:Int) : MoviesResponse {
-        return apiServiceInterface?.getNewMoviess(pageIndex,Constants.TMDB_API_KEY)!!
-    }*/
 }
