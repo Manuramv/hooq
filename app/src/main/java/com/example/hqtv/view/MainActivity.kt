@@ -7,23 +7,14 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.hqtv.R
-import com.example.hqtv.models.MoviesResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hqtv.commonutils.Constants
 import com.example.hqtv.commonutils.NetworkUtils
-import com.example.hqtv.customcomponents.HqAlertDialog
 import kotlinx.android.synthetic.main.custom_hq_error_dialog.*
-import androidx.paging.PagedList
 import io.reactivex.disposables.CompositeDisposable
-import androidx.core.os.HandlerCompat.postDelayed
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 import android.os.Handler
-import android.util.Log
 
 
 class MainActivity : AppCompatActivity() {
@@ -61,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeLiveData() {
         //observe live data emitted by view model
         if(NetworkUtils.isNetworkAvailable(this)){
-            mainViewModel.getPosts()?.observe(this, Observer {
+            mainViewModel.getMovies()?.observe(this, Observer {
                 movieAdapter.submitList(it)
                 hideInitialLoadingProgressBar()
                 hideNetworErrorMessage()

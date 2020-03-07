@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
         postsLiveData  = initializedPagedListBuilder(config).build()
     }
 
-    fun getPosts():LiveData<PagedList<Result>> = postsLiveData
+    fun getMovies():LiveData<PagedList<Result>> = postsLiveData
 
 
 
